@@ -15,6 +15,92 @@
       align-items: center;
       padding: 2rem;
     }
+            header {
+            background-color: #111;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: '\1F3AD';
+            margin-right: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 500;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffc107;;
+        }
+
+        .book-btn {
+            background-color: #ffc107;;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .book-btn:hover {
+            background-color:#ffc107;;
+        }
+        /* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #000;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}
+
+/* Hover effects */
+.dropdown-content a:hover {
+  background-color: #333;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 
     .intro {
       max-width: 800px;
@@ -28,6 +114,7 @@
     h1 {
       color: #ffc107;
       margin-bottom: 1rem;
+      margin-top: 70px;
     }
 
     .dashboard-container {
@@ -71,6 +158,26 @@
   </style>
 </head>
 <body>
+  <header>
+  <div class="logo">ABINAYATI</div>
+  <nav>
+    <a href="#" id="homeLink">Home</a>
+    <div class="dropdown">
+  <a href="#" id="classificationLink">Classification</a>
+</div>
+    <div class="dropdown">
+    <a href="#" id="bookLink">Book ▾</a>
+     <div class="dropdown-content">
+    <a href="theatrearts/frontend/admin-auth.html">Admin</a>
+    <a href="theatrearts/frontend/artist-auth.html">Artist</a>
+    <a href="theatrearts/frontend/user-auth.html">User</a>
+  </div>
+</div>
+<a href="community/index.html" id="communitylink">Community</a>
+<a href="#" id="crowdfundingLink">CrowdFunding</a>
+    <a href="#" id="chatbotLink">Queries</a>
+  </nav>
+</header>
   <h1>Artform Classification Dashboard</h1>
   <div class="intro">
     Indian theatre is a blend of traditional, cultural, and regional art forms. To make exploration easier, we have classified these into broad sections that showcase the diversity of theatre across India.
@@ -101,5 +208,52 @@
       <p>Interact with our AI to learn more about theatre forms and upcoming shows.</p>
     </div>
   </div>
+  <script>
+     document.getElementById("bookLink").addEventListener("click", function (e) {
+    e.preventDefault();
+    const dropdown = this.nextElementSibling;
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  });
+
+  // Optional: Close dropdown if clicked elsewhere
+  window.addEventListener("click", function (e) {
+    if (!e.target.matches('#bookLink')) {
+      const dropdowns = document.querySelectorAll(".dropdown-content");
+      dropdowns.forEach(dd => dd.style.display = "none");
+    }
+  });
+
+        // JavaScript to handle navigation clicks
+document.getElementById("classificationLink").addEventListener("click", function (event) {
+  event.preventDefault(); // Prevents the default anchor behavior
+  window.location.href = "classification.html"; // Redirects to classification.html
+});
+
+// Optional: Add similar listeners for other links
+document.getElementById("homeLink").addEventListener("click", function (event) {
+  event.preventDefault();
+  window.location.href = "index.html";
+});
+
+document.getElementById("bookLink").addEventListener("click", function (event) {
+  event.preventDefault();
+  window.location.href = "book.html";
+});
+
+document.getElementById("chatbotLink").addEventListener("click", function (event) {
+  event.preventDefault();
+  window.location.href = "chatbot.html";
+});
+
+document.getElementById("crowdfundingLink").addEventListener("click", function (event) {
+  event.preventDefault();
+  window.location.href = "crowdfunding.html";
+});
+document.getElementById("communitylink").addEventListener("click", function (event) {
+  event.preventDefault();
+  window.location.href = "community/index.html";
+});
+
+  </script>
 </body>
 </html>

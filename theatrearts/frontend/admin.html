@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <style>
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+   body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1e1e2f;
+      color: #f0f0f0;
+
+    }
+
+    nav {
+      background-color: #1e1e2f;
+      padding: 12px 0;
+      margin-bottom: 30px;
+    }
+
+    .navbar {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar li a {
+      color: #ffc107;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .navbar li a:hover {
+      color: #ffc107;
+    }
+
+
+    h1 {
+      text-align: center;
+      color: #ffc107;
+      margin: 30px 0;
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #2b2b3c;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      color: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 20px;
+      text-align: left;
+      border-bottom: 1px solid #444;
+    }
+
+    th {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    tr:hover {
+      background-color: #3b3b4c;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+  <ul class="navbar">
+    <li><a href="admin.html">Admin</a></li>
+    <li><a href="artist-details.html">Artist Details</a></li>
+    <li><a href="artist-shows.html">Artist Shows</a></li>
+    <li><a href="user-details.html">User Details</a></li>
+    <li><a href="user-bookings.html">User Bookings</a></li>
+  </ul>
+</nav>
+  <!-- Page Heading -->
+  <h1>Registered Admin Details</h1>
+
+  <!-- Admin Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody id="adminTableBody">
+      <!-- Dynamic rows will be inserted here -->
+    </tbody>
+  </table>
+
+  <script>
+    async function fetchAdminDetails() {
+      try {
+        const res = await fetch("http://localhost:3000/api/admins"); // Make sure this route exists in your backend
+        const admins = await res.json();
+
+        const tableBody = document.getElementById("adminTableBody");
+        tableBody.innerHTML = "";
+
+        admins.forEach(admin => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${admin.name}</td>
+            <td>${admin.email}</td>
+            <td>${admin.password}</td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error("Error fetching admin data:", error);
+      }
+    }
+
+    fetchAdminDetails();
+  </script>
+
+</body>
+</html>
